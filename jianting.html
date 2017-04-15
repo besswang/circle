@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>angularjs</title>
+    <script src="https://cdn.bootcss.com/angular.js/1.4.0/angular.js"></script>
+</head>
+<body class="container">
+<header class="page-header"><h1>监听</h1></header>
+没用到watch的监听
+<section ng-app="myApp">
+    <div ng-controller="circleCtrl">
+        <div style="background:red;
+                    border-radius:{{circle.r}}px;
+                    width:{{circle.r}}px;
+                    height:{{circle.r}}px;
+        "></div>
+        <span>{{msg}}</span>
+        <input type="number" ng-model="circle.r">
+        <div>面积：{{circle.area()}}平方米</div>
+        <div>周长：{{perimeter()}}米</div>
+    </div>
+</section>
+<script>
+    function myCtrl($scope) {
+        $scope.msg = "半径";//基本属性
+
+        //自定义对象
+        $scope.circle={
+            //对象属性
+            r:25,
+            //对象方法
+            area:function () {
+                return 3.14*this.r*this.r;
+            }
+        };
+
+        //自定义方法
+        $scope.perimeter = function () {
+            return 3.14*$scope.circle.r;
+        }
+    }
+    angular
+        .module("myApp",[])//注册模块
+        .controller("circleCtrl",myCtrl);//注册控制器
+</script>
+</body>
+</html>
